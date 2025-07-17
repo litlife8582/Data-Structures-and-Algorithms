@@ -9,7 +9,7 @@ struct Array{
 
 void display(struct Array arr){
     printf("The elements of the array are: \n");
-    for(int i=0;i<arr.size;i++){
+    for(int i=0;i<arr.length;i++){
         printf("%d\n",arr.A[i]);
     }
 }
