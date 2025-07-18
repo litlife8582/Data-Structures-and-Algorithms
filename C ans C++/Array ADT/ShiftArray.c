@@ -1,31 +1,37 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
 struct Array{
     int *A;
     int *B;
-    int size;
     int length;
+    int size;
 };
 
 void display(struct Array arr){
-    printf("Original array is: \n");
     for(int i=0;i<arr.length;i++){
-        printf("%d\n",arr.A[i]);
+        printf("%d ",arr.A[i]);
     }
 
-    printf("Reversed array is:\n");
+    printf("\n");
+
     for(int i=0;i<arr.length;i++){
-        printf("%d\n",arr.B[i]);
+        printf("%d ",arr.B[i]);
     }
 }
 
-void reverse(struct Array *arr){
-    int j=arr->length-1;
-    for(int i=0;i<arr->length;i++){
-       arr->B[j]=arr->A[i];
-       j--;
+void shift(struct Array *arr,int k){
+     k=k%arr->length;
+
+    int j=0;
+
+    for(int i=k; i<arr->length; i++){
+        arr->B[j++] = arr->A[i];
+    }
+
+    
+    for(int i=0;i<k;i++){
+        arr->B[j++]=arr->A[i];
     }
 }
 
@@ -44,9 +50,12 @@ int main(){
         scanf("%d",&arr.A[i]);
     }
 
-    display(arr);
 
-    reverse(&arr);
+    int num;
+    printf("Enter the number of places to shift the elements in the array: ");
+    scanf("%d",&num);
+
+    shift(&arr,num);
     
     display(arr);
     return 0;
