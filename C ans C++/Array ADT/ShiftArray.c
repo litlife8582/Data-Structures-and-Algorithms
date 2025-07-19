@@ -58,5 +58,6 @@ int main(){
     shift(&arr,num);
     
     display(arr);
+    
     return 0;
 }

@@ -1,1 +1,2 @@
-k=k%arr->length;
+displayA(arr);
+    // displayB(arr);
