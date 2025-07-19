@@ -31,13 +31,23 @@ void displayC(struct Array arr){
 
 
 void merge(struct Array *arr){
-
     for(int i=0;i<arr->lengthA;i++){
         arr->C[i]=arr->A[i];
     }
     for(int i=arr->lengthA;i<arr->lengthA+arr->lengthB;i++){
         arr->C[i]=arr->B[i-arr->lengthA];
     }
+
+    // Bubble sort causes o((n+m)^2) time
+    // for(int i=0;i<arr->lengthC;i++){
+    //     for(int j=0;j<arr->lengthC-i-1;j++){
+    //         if(arr->C[j]>arr->C[j+1]){
+    //             int temp=arr->C[j+1];
+    //             arr->C[j+1]=arr->C[j];
+    //             arr->C[j]=temp;
+    //         }
+    //     }
+    // }
 }
 
 int main(){
