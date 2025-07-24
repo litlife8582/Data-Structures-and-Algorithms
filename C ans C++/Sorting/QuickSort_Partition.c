@@ -14,9 +14,11 @@ int partition(int A[],int l,int h){
     int i=l,j=h;
 
     do{
-        do{i++;} while(A[i]<=pivot);
-        do{j--;} while(A[j]>pivot);
+        do{i++;} while(A[i]<=pivot);//exits the loop on finding an element larger than pivot
+        //once a element larger than pivot is found to the left it proceeds with the next loop which finds the element which is less than pivot right of the pivot
+        do{j--;} while(A[j]>pivot);//exits once an element smaller than pivot is found on the right
 
+        //Swaps the irregular elements
         if(i<j)swap(&A[i],&A[j]);
     }while(i<j);
 
