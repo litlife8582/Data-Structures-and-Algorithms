@@ -20,9 +20,9 @@ int partition(int A[],int l,int h){
 
         //Swaps the irregular elements
         if(i<j)swap(&A[i],&A[j]);
-    }while(i<j);
+    }while(i<j);//repeated until i moves to the right of pivot and j moves to the left of pivot
 
-    swap(&A[l],&A[j]);
+    swap(&A[l],&A[j]);//Swaps pivot with the current position of j to center it
     return j;
 }
 
@@ -32,8 +32,8 @@ void QuickSort(int A[],int l,int h){
     int j;
     if(l<h){
         j=partition(A,l,h);
-        QuickSort(A,l,j);
-        QuickSort(A,j+1,h);
+        QuickSort(A,l,j);//Recursive call to sort the left side of the pivot
+        QuickSort(A,j+1,h);//Recursive call to sort the right side of the pivot
     }
 }
 
