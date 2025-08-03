@@ -73,7 +73,6 @@ char* convert(struct Stack *st,char* infix){
 
 int main(){
     struct Stack s;
-    // char *infix="a+b+c";
 
     char *infix;
     scanf("%s",infix);
