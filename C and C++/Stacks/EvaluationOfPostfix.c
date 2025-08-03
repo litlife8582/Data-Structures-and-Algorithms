@@ -41,12 +41,6 @@ int isOperand(char x){
     }
 }
 
-int pre(char x){
-    if(x=='+' || x=='-') return 1;
-    else if(x=='*' || x=='/') return 2;
-    return 0;
-}
-
 int evaluate(struct Stack *st,char *postfix){
     int i=0;
     int x1,x2,r;
