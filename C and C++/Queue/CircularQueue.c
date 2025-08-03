@@ -45,7 +45,7 @@ void display(struct Queue q){
     printf("Queue elements: ");
     while(i != (q.rear + 1) % q.size){
         printf("%d ", q.Q[i]);
-        i = (i + 1) % q.size;  // increment circularly
+        i = (i + 1) % q.size;
     }
     printf("\n");
 }
