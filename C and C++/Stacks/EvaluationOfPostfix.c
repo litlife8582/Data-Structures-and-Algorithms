@@ -5,16 +5,16 @@
 struct Stack{
     int size;
     int top;
-    char* S;
+    int* S;
 };
 
 void createStack(struct Stack *st,int size){
     st->top=-1;
     st->size=size;
-    st->S=(char*)malloc(st->size*sizeof(char));
+    st->S=(int*)malloc(st->size*sizeof(int));
 }
 
-void push(struct Stack *st,char n){
+void push(struct Stack *st,int n){
     if(st->top==st->size-1){
         printf("Stack Overflow\n");
     }else{
@@ -23,8 +23,8 @@ void push(struct Stack *st,char n){
     }
 }
 
-char pop(struct Stack *st){
-    char x=-1;
+int pop(struct Stack *st){
+    int x=-1;
     if(st->top<0){
         printf("Stack Underflow\n");
     }else{
@@ -47,43 +47,49 @@ int pre(char x){
     return 0;
 }
 
-char* convert(struct Stack *st,char* infix){
-    char* postfix=(char* )malloc((strlen(infix)+2)*sizeof(char));
-    int i,j;
-    i=j=0;
+int evaluate(struct Stack *st,char *postfix){
+    int i=0;
+    int x1,x2,r;
 
-    while(infix[i]!='\0'){
-        if(isOperand(infix[i]))
-            postfix[j++]=infix[i++];
+    for(i=0;postfix[i]!=0;i++){
+        if(isOperand(postfix[i]))
+            push(st,postfix[i]-'0');
         else{
-            if(pre(infix[i])>pre(st->S[st->top]))
-                push(st,infix[i++]);
-            else{
-                postfix[j++]=pop(st);
+            x2=pop(st);
+            x1=pop(st);
+
+            switch (postfix[i]){
+            case '+':
+                r=x1+x2;
+                break;
+
+            case '-':
+                r=x1-x2;
+                break;
+            
+            case '*':
+                r=x1*x2;
+                break;
+            
+            case '/':
+                r=x1/x2;
+                break;
             }
+            push(st,r);
         }
     }
-    while(st->top!=0)
-        postfix[j++]=pop(st);
-    postfix[j]='\0';
-    
-    return postfix;
+    return pop(st);
 }
-
 
 int main(){
     struct Stack s;
 
-    char *infix;
-    scanf("%s",infix);
+    char postfix[100];
+    scanf("%s",postfix);
 
-    int stackSize = strlen(infix) + 2;
+    int stackSize = strlen(postfix) + 2;
     createStack(&s,stackSize);
-    
-    push(&s,'#');
 
-    char *postfix=convert(&s,infix);
-
-    printf("%s ",postfix);
+    printf("%d ",evaluate(&s,postfix));
     return 0;
 }
