@@ -3,46 +3,37 @@
 
 struct Node{
     int data;
-    struct Node* next;    
+    struct Node *next;
 }*first=NULL;
 
-struct Node* create(int value){
-    struct Node *p=(struct Node*)malloc(sizeof(struct Node));
-    if(!p){
-        printf("Memory Allocation Failed");
-        exit(0);
-    }  
-    p->data=value;
-    p->next=NULL;
-    return p;
+
+void create(int A[],int n){
+    int i;
+    struct Node *t,*last;
+    first=(struct Node*)malloc(sizeof(struct Node));
+    first->data=A[0];
+    first->next=NULL;
+    last=first;
+
+    for(int i=1;i<n;i++){
+        t=(struct Node*)malloc(sizeof(struct Node));
+        t->data=A[i];
+        t->next=NULL;
+        last->next=t;
+        last=t;
+    }
 }
 
-void display(struct Node* p){
-    p=first;
-    while(p){
+void Display(struct Node *p){
+    while(p!=NULL){
         printf("%d ",p->data);
         p=p->next;
     }
-    printf("\n");
 }
 
-void insert(int value, int pos){
-    struct Node *t,*p;
-    t=create(value);
-
-    if(pos==1){
-        t->next=first;
-        first=t;
-    }else{
-        t=first;
-        for(int i=1;i<pos;i++){
-            p=p->next;
-        }
-        t->next=p->next;
-        p->next=t;
-    }   
-}
-
-void main(){
-    
+int main(){
+    int A[]={3,5,7,10,15};
+    create(A,5);
+    Display(first);
+    return 0;
 }
