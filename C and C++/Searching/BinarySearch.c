@@ -8,7 +8,6 @@ struct Array{
 };
 
 int binarySearch(struct Array arr, int element){
-    int index=-1;
     int low=0,high=arr.length-1;
     while(low<=high){
         int mid=(low+high)/2;
@@ -64,7 +63,7 @@ int main(){
     printf("Enter the element to be searched: ");
     scanf("%d",&ele);
 
-    printf("The index of the given element is: %d",binarySearch(arr,ele));
+    printf("The index of the given element is: %d\n",binarySearch(arr,ele));
 
     return 0;
 }
