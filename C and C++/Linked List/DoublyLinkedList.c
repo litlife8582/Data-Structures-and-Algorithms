@@ -142,7 +142,8 @@ int sum(){
 
 
 int main(){
-    int choice,num;
+    int choice=0;
+    int num;
     printf("Enter 1 : To create a Linked List\n");
     printf("Enter 2 : To diplay the Linked List\n");
     printf("Enter 3 : To insert in the Linked List\n");
