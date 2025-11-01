@@ -87,9 +87,41 @@ void preorder(struct Node *t) {
     }
 }
 
+void inorder(struct Node *t) {
+    if (t!=NULL) {
+        inorder(t->lChild);
+        printf("%d ",t->data);
+        inorder(t->rChild);
+    }
+}
+
+void postorder(struct Node *t) {
+    if (t!=NULL) {
+        postorder(t->lChild);
+        postorder(t->rChild);
+        printf("%d",t->data);
+    }
+}
+
 int main() {
     createTree();
-    preorder(root);
+    int choice;
+    printf("Enter the choice for traversal:\n 1.Preorder\n 2.Inorder\n 3.Postorder\n");
+    scanf("%d",&choice);
+    switch (choice) {
+        case 1:
+            preorder(root);
+            break;
+
+        case 2:
+            inorder(root);
+            break;
+
+        case 3:
+            postorder(root);
+            break;
+    }
+
     return 0;
 }
 
