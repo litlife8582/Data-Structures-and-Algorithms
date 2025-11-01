@@ -23,7 +23,7 @@ void creation(int x){
     }
 }
 
-void displayInOrder(){
+void display(){
     struct Node* temp=first;
     while(temp->next!=NULL && temp!=NULL){
         printf("%d ",temp->data);
@@ -41,7 +41,7 @@ void displayReverseOrder(){
     printf("\n");
 }
 
-void insert(int x, int n){
+void insertion(int x, int n){
     struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
     newNode->data=x;
     newNode->next=NULL;
@@ -117,7 +117,7 @@ int search(int key){
         temp=temp->next;
         index++;
     }
-    return;
+    return index;
 }
 
 int count(){
@@ -154,6 +154,7 @@ int main(){
     printf("Enter 9 : To remove duplicate elements in Linked List is sorted\n");
     printf("Enter 10: To reverse elements in Linked List is sorted\n");
     printf("Enter -1: To end operations\n");
+    int x;
     while(choice!=-1){
         printf("Enter your choice:\n");
         scanf("%d",&choice);
@@ -164,14 +165,13 @@ int main(){
         break;
 
         case 1:
-            int x;
             printf("Enter the number of elements to be entered in the linked list: ");
             scanf("%d",&num);
 
             printf("Enter the elements: ");
             for(int i=0;i<num;i++){
                 scanf("%d",&x);
-                insertionLast(x);
+                creation(x);
             }
 
             printf("Node successfully created\n");
@@ -196,7 +196,6 @@ int main(){
         break;
 
         case 5:
-            int x;
             printf("Enter the element to be searched: ");
             scanf("%d",&x);
             printf("The required element is in node: %d\n",search(x));
