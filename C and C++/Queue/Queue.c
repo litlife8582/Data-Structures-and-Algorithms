@@ -14,8 +14,18 @@ void create(struct Queue *q,int size){
     q->Q=(int *)malloc(q->size*sizeof(int));
 }
 
+int isEmpty(struct Queue *q) {
+    if(q->front==q->rear) return 1;
+    else return 0;
+}
+
+int isFull(struct Queue *q){
+    if (q->rear=q->size-1) return 1;
+    else return 0;
+}
+
 void enqueue(struct Queue *q,int x){
-    if(q->rear==q->size-1)
+    if(isFull(q))
         printf("Queue is full");
     else{
         q->rear++;
@@ -25,9 +35,8 @@ void enqueue(struct Queue *q,int x){
 
 int dequeue(struct Queue *q){
     int x=-1;
-    if(q->front==q->rear){
-        printf("Queue is Empty");
-    }else{
+    if (isEmpty(q)) printf("Queue is Empty\n");
+    else{
         q->front++;
         x=q->Q[q->front];
     }
