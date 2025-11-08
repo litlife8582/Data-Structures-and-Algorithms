@@ -1,0 +1,2 @@
+displayA(arr);
+    // displayB(arr);
