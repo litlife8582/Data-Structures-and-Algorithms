@@ -20,6 +20,8 @@ void create(struct Queue *q,int size){
     q->Q=(struct Node**)malloc(q->size*sizeof(struct Node*));
 }
 
+
+//Here we enqueue and dequeue memory addresses of nodes(struct Node*) into the queue
 void enqueue(struct Queue *q,struct Node* x){
     if(q->rear==q->size-1)
         printf("Queue is full");
