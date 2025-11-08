@@ -73,8 +73,109 @@ void primMST(int graph[N][N]) {
     printMST(parent,graph);
 }
 
+
+/*-----------------------------------------------Kruskal's Algorithm--------------------------------------*/
+int comparator(const void* p1, const void* p2)
+{
+    const int* a = *(const int(*)[3])p1;
+    const int* b = *(const int(*)[3])p2;
+    return a[2] - b[2];
+}
+
+void makeSet(int parent[], int rank[], int n)
+{
+    for (int i = 0; i < n; i++) {
+        parent[i] = i;
+        rank[i] = 0;
+    }
+}
+
+int findParent(int parent[], int component)
+{
+    if (parent[component] == component)
+        return component;
+
+    return parent[component]
+           = findParent(parent, parent[component]);
+}
+
+void unionSet(int u, int v, int parent[], int rank[])
+{
+    u = findParent(parent, u);
+    v = findParent(parent, v);
+
+    if (rank[u] < rank[v]) {
+        parent[u] = v;
+    }
+    else if (rank[u] > rank[v]) {
+        parent[v] = u;
+    }
+    else {
+        parent[v] = u;
+        rank[u]++;
+    }
+}
+
+int kruskalAlgo(int V, int E, int edge[E][3])
+{
+    qsort(edge, E, sizeof(edge[0]), comparator);
+
+    int* parent = (int*)malloc(V * sizeof(int));
+    int* rank = (int*)malloc(V * sizeof(int));
+
+    makeSet(parent, rank, V);
+
+    int minCost = 0;
+    printf("Edge \tWeight\n");
+
+    for (int i = 0; i < E; i++) {
+        int v1 = findParent(parent, edge[i][0]);
+        int v2 = findParent(parent, edge[i][1]);
+        int wt = edge[i][2];
+
+        if (v1 != v2) {
+            unionSet(v1, v2, parent, rank);
+            minCost += wt;
+            printf("%d - %d \t%d \n", edge[i][0], edge[i][1], wt);
+        }
+    }
+
+    free(parent);
+    free(rank);
+
+    return minCost;
+}
+
 int main() {
     display();
     primMST(G);
+    int edgeCount = 0;
+    for(int i = 0; i < N; i++) {
+        for(int j = i + 1; j < N; j++) {
+            if(G[i][j] != 0) {
+                edgeCount++;
+            }
+        }
+    }
+
+    int (*edgeList)[3] = malloc(edgeCount * sizeof(*edgeList));
+
+    int k = 0;
+    for(int i = 0; i < N; i++) {
+        for(int j = i + 1; j < N; j++) {
+            if(G[i][j] != 0) {
+                edgeList[k][0] = i;
+                edgeList[k][1] = j;
+                edgeList[k][2] = G[i][j];
+                k++;
+            }
+        }
+    }
+
+    int minCost = kruskalAlgo(N, edgeCount, edgeList);
+    printf("Minimum Cost: %d\n", minCost);
+
+    free(edgeList);
+
     return 0;
 }
