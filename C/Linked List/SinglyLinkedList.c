@@ -132,17 +132,18 @@ int sum(){
     return sum;
 }
 
-bool checkSorted(){
-    struct Node* node1=first;
-    struct Node* node2=first->next;
-    while(node2){
-        if(node1->data>node2->data){
-            return false;
-        }
-        node1=node1->next;
-        node2=node2->next;
+int checkSorted() {
+    if (first==NULL) {
+        printf("Cannot check an empty list.\n");
+        return -1;
     }
-    return true;
+
+    struct Node* temp=first;
+    while (temp!=NULL && temp->next!=NULL) {
+        if (temp->data>temp->next->data) return 0;
+        temp=temp->next;
+    }
+    return 1;
 }
 
 void removeDuplicate(){
