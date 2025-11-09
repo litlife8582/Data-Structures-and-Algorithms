@@ -185,7 +185,7 @@ int main(){
     printf("Enter 7 : To calculate the sum of node values in the Linked List\n");
     printf("Enter 8 : To check whether Linked List is sorted\n");
     printf("Enter 9 : To remove duplicate elements in Linked List is sorted\n");
-    printf("Enter 10: To reverse elements in Linked List is sorted\n");
+    printf("Enter 10: To reverse elements in Linked List if sorted\n");
     printf("Enter -1: To end operations\n");
 
     while(choice!=-1){
