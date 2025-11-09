@@ -35,18 +35,34 @@ void display(){
     printf("\n");
 }
 
-void insertion(int x, int n){
-    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
-    newNode->data=x;
-    newNode->next=NULL;
+void insertion(int key, int pos) {
+    struct Node* node=(struct Node*)malloc(sizeof(struct Node));
+    node->data=key;
+    node->next=NULL;
 
-    struct Node* temp=first;
-    for(int i=0;i<n;i++){
-        temp=temp->next;
+
+    if (pos==1) {
+        node->next=first;
+        first=node;
+        return;
     }
 
-    newNode->next=temp->next;
-    temp->next=newNode;
+    if (first==NULL) {
+        printf("Invalid position for empty list.\n");
+        free(node);
+        return;
+    }
+    struct Node* temp=first;
+    for (int i=0;i<pos-2;i++) {
+        temp=temp->next;
+        if (temp==NULL) {
+            printf("Position out of bound.\n");
+            free(node);
+            return;
+        }
+    }
+    node->next=temp->next;
+    temp->next=node;
 }
 
 int deletion(int position){
