@@ -15,7 +15,7 @@ int Partition(int arr[], int l, int h) {
     while (1) {
         do{i++;} while (arr[i] < pivot);
         do{j--;} while (arr[j] > pivot);
-        if (i >= j) return j;
+        if (i >= j) return j;// j is the point where the pivot currently is
         swap(&arr[i], &arr[j]);
     }
 }
@@ -23,7 +23,7 @@ int Partition(int arr[], int l, int h) {
 void QuickSort(int A[], int l, int h){
     int j;
     if(l<h){
-        j=Partition(A,l,h);
+        j=Partition(A,l,h);//THe pivot is returned and the array is divided from the pivot
         QuickSort(A,l,j);
         QuickSort(A,j+1,h);
     }
