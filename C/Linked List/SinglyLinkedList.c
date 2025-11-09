@@ -146,20 +146,22 @@ int checkSorted() {
     return 1;
 }
 
-void removeDuplicate(){
-    if(!checkSorted()){
-        printf("The list is not sorted\n");
-    }else{
-        struct Node* current=first;
-        struct Node* newNode;
-        while(current && current->next){
-            if(current->data==current->next->data){
-                newNode=current->next->next;
-                free(current->next);
-                current->next=newNode;
-            }else{
-                current=current->next;
-            }
+void removeDuplicate() {
+    if (first==NULL) return;
+    if (!checkSorted()) {
+        printf("Linked list not sorted!\n");
+        return;
+    }
+
+    struct Node* temp=first,*deleted=NULL;
+
+    while (temp!=NULL && temp->next!=NULL) {
+        if (temp->data==temp->next->data) {
+            deleted=temp->next;
+            temp->next=temp->next->next;
+            free(deleted);
+        }else {
+            temp=temp->next;
         }
     }
 }
