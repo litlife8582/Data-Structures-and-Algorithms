@@ -13,10 +13,10 @@ int Partition(int arr[], int l, int h) {
     int j = h + 1;
 
     while (1) {
-        do{i++;} while (arr[i] < pivot);
-        do{j--;} while (arr[j] > pivot);
-        if (i >= j) return j;// j is the point where the pivot currently is
-        swap(&arr[i], &arr[j]);
+        do{i++;} while (arr[i] < pivot);//Loop runs until an element in arr[] larger than pivot is found
+        do{j--;} while (arr[j] > pivot);//Loop runs until an element in arr[] smaller than pivot is found 
+        if (i >= j) return j;//If i and j has crossed the pivot then j is the point where the pivot currently is
+        swap(&arr[i], &arr[j]);//Elements at i and j positions (i greater than pivot) and (j smaller than pivot) is swapped
     }
 }
 
