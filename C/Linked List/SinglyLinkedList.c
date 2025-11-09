@@ -65,32 +65,39 @@ void insertion(int key, int pos) {
     temp->next=node;
 }
 
-int deletion(int position){
-    if(position<1 || first==NULL){
+int deletion(int pos) {
+    int del;
+    struct Node *deleted=first, *temp=NULL;
+    if (pos<1 || first==NULL) {
+        printf("Invalid index.\n");
         return -1;
     }
 
-    struct Node *deleted=first;
-    struct Node *beforeDeleted=NULL;
-    int deletedValue;
-
-    if(position==1){
-        deletedValue=first->data;
-        deleted=first;
+    if (pos==1) {
+        del=first->data;
         first=first->next;
         free(deleted);
-    }else{
-        deleted=first;
-        for(int i=0;i<position-1 && deleted;i++){
-            beforeDeleted=deleted;
-            deleted=deleted->next;
+    }else {
+        temp=first;
+        for (int i=0;i<pos-2;i++) {
+            if (temp->next == NULL) {
+                printf("Position out of bounds.\n");
+                return -1;
+            }
+            temp=temp->next;
         }
-        deletedValue=deleted->data;
-        beforeDeleted->next=deleted->next;
-        
+        deleted=temp->next;
+        if (deleted==NULL) {
+            printf("Position out of bound.\n");
+            return -1;
+        }
+
+        temp->next=deleted->next;
+        del=deleted->data;
         free(deleted);
     }
-    return deletedValue;
+
+    return del;
 }
 
 int search(int n){
