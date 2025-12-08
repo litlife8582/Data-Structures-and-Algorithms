@@ -35,46 +35,69 @@ void display(){
     printf("\n");
 }
 
-void insertion(int x, int n){
-    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
-    newNode->data=x;
-    newNode->next=NULL;
+void insertion(int key, int pos) {
+    struct Node* node=(struct Node*)malloc(sizeof(struct Node));
+    node->data=key;
+    node->next=NULL;
 
-    struct Node* temp=first;
-    for(int i=0;i<n;i++){
-        temp=temp->next;
+
+    if (pos==1) {
+        node->next=first;
+        first=node;
+        return;
     }
 
-    newNode->next=temp->next;
-    temp->next=newNode;
+    if (first==NULL) {
+        printf("Invalid position for empty list.\n");
+        free(node);
+        return;
+    }
+    struct Node* temp=first;
+    for (int i=0;i<pos-2;i++) {
+        temp=temp->next;
+        if (temp==NULL) {
+            printf("Position out of bound.\n");
+            free(node);
+            return;
+        }
+    }
+    node->next=temp->next;
+    temp->next=node;
 }
 
-int deletion(int position){
-    if(position<1 || first==NULL){
+int deletion(int pos) {
+    int del;
+    struct Node *deleted=first, *temp=NULL;
+    if (pos<1 || first==NULL) {
+        printf("Invalid index.\n");
         return -1;
     }
 
-    struct Node *deleted=first;
-    struct Node *beforeDeleted=NULL;
-    int deletedValue;
-
-    if(position==1){
-        deletedValue=first->data;
-        deleted=first;
+    if (pos==1) {
+        del=first->data;
         first=first->next;
         free(deleted);
-    }else{
-        deleted=first;
-        for(int i=0;i<position-1 && deleted;i++){
-            beforeDeleted=deleted;
-            deleted=deleted->next;
+    }else {
+        temp=first;
+        for (int i=0;i<pos-2;i++) {
+            if (temp->next == NULL) {
+                printf("Position out of bounds.\n");
+                return -1;
+            }
+            temp=temp->next;
         }
-        deletedValue=deleted->data;
-        beforeDeleted->next=deleted->next;
-        
+        deleted=temp->next;
+        if (deleted==NULL) {
+            printf("Position out of bound.\n");
+            return -1;
+        }
+
+        temp->next=deleted->next;
+        del=deleted->data;
         free(deleted);
     }
-    return deletedValue;
+
+    return del;
 }
 
 int search(int n){
@@ -109,33 +132,36 @@ int sum(){
     return sum;
 }
 
-bool checkSorted(){
-    struct Node* node1=first;
-    struct Node* node2=first->next;
-    while(node2){
-        if(node1->data>node2->data){
-            return false;
-        }
-        node1=node1->next;
-        node2=node2->next;
+int checkSorted() {
+    if (first==NULL) {
+        printf("Cannot check an empty list.\n");
+        return -1;
     }
-    return true;
+
+    struct Node* temp=first;
+    while (temp!=NULL && temp->next!=NULL) {
+        if (temp->data>temp->next->data) return 0;
+        temp=temp->next;
+    }
+    return 1;
 }
 
-void removeDuplicate(){
-    if(!checkSorted()){
-        printf("The list is not sorted\n");
-    }else{
-        struct Node* current=first;
-        struct Node* newNode;
-        while(current && current->next){
-            if(current->data==current->next->data){
-                newNode=current->next->next;
-                free(current->next);
-                current->next=newNode;
-            }else{
-                current=current->next;
-            }
+void removeDuplicate() {
+    if (first==NULL) return;
+    if (!checkSorted()) {
+        printf("Linked list not sorted!\n");
+        return;
+    }
+
+    struct Node* temp=first,*deleted=NULL;
+
+    while (temp!=NULL && temp->next!=NULL) {
+        if (temp->data==temp->next->data) {
+            deleted=temp->next;
+            temp->next=temp->next->next;
+            free(deleted);
+        }else {
+            temp=temp->next;
         }
     }
 }
@@ -162,7 +188,7 @@ int main(){
     printf("Enter 7 : To calculate the sum of node values in the Linked List\n");
     printf("Enter 8 : To check whether Linked List is sorted\n");
     printf("Enter 9 : To remove duplicate elements in Linked List is sorted\n");
-    printf("Enter 10: To reverse elements in Linked List is sorted\n");
+    printf("Enter 10: To reverse elements in Linked List if sorted\n");
     printf("Enter -1: To end operations\n");
 
     while(choice!=-1){

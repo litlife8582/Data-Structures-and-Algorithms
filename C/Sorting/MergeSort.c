@@ -6,17 +6,22 @@ void Merge(int A[],int l,int m, int h){
     int i=l,j=m+1,k=l;
     int C[100];
     while(i<=m && j<=h){
-        if(A[i]<A[j])
-            C[k++]=A[i++];
+        if(A[i]<A[j])//Compares the indexes of the arrays to check which has smaller element
+            C[k++]=A[i++];//If ith index is smaller than jth index it's element will be addded to a new array
         else
-            C[k++]=A[j++];
-    }
+            C[k++]=A[j++];//Otherwise jth index element will be added
+    }//this looping ends when all element of the smaller half is compared and added
+    
+    //Now we add the remaining elements of the larger array.
+    //We run loop for both halfs whichever half has remaining elements add and the other one remains unchanged
     for(;i<=m;i++){
         C[k++]=A[i];
     }
     for(;j<=h;j++){
         C[k++]=A[j];
     }
+
+    //We copy the sorted array into the original array
     for(int i=l;i<=h;i++){
         A[i]=C[i];
     }
