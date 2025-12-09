@@ -7,4 +7,5 @@ include_directories(.)
 
 add_executable(CPP_Algorithms
         ActivitySelectionProblem.cpp
+        N_meetings_in_one_room.cpp
 )
