@@ -9,4 +9,6 @@ add_executable(CPP_Algorithms
         ActivitySelectionProblem.cpp
         N_meetings_in_one_room.cpp
         FractionalKnapsackProblem.cpp
+        HuffmannEncoding.cpp
+        MaximumSubarrayProblem.cpp
 )
