@@ -69,7 +69,8 @@ int main(){
     Node* deletedHead=deleteKey(head,target);
 
     while(deletedHead!=NULL){
-        cout<<deletedHead->data<<"->";
+        if (deletedHead->next!=NULL) cout<<deletedHead->data<<"->";
+        else cout<<deletedHead->data;
         deletedHead=deletedHead->next;
     }
 
