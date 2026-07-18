@@ -11,4 +11,5 @@ add_executable(CPP_Algorithms
         FractionalKnapsackProblem.cpp
         HuffmannEncoding.cpp
         MaximumSubarrayProblem.cpp
+        Karatsuba.cpp
 )
